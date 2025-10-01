@@ -89,9 +89,9 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ee1p5"]
-radius = 9.05539
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 5
 script = ExtResource("1_qskxa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -103,5 +103,5 @@ frame = 8
 frame_progress = 0.7626
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_ee1p5")
