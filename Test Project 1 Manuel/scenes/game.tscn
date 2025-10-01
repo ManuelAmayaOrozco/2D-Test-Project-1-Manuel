@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://2ptb0mp7lq42"]
+[gd_scene load_steps=12 format=3 uid="uid://2ptb0mp7lq42"]
 
 [ext_resource type="Texture2D" uid="uid://bwu1syj7sq6tx" path="res://assets/Terrain/Terrain (16x16).png" id="1_1v0eo"]
 [ext_resource type="PackedScene" uid="uid://brci122yfy145" path="res://scenes/MainGuy.tscn" id="1_rw1xu"]
 [ext_resource type="PackedScene" uid="uid://dwyxwkwpnya87" path="res://scenes/platform.tscn" id="3_shm5x"]
+[ext_resource type="PackedScene" uid="uid://brq78ae64avhc" path="res://scenes/banana.tscn" id="4_uh73y"]
+[ext_resource type="PackedScene" uid="uid://b8k3vr0b27drw" path="res://scenes/killzone.tscn" id="5_iqr02"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eduvm"]
 texture = ExtResource("1_1v0eo")
@@ -625,6 +627,9 @@ _data = {
 "move": SubResource("Animation_jpnt0")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5v7ns"]
+distance = -1.0
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -638,6 +643,7 @@ position = Vector2(10, 1)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -9)
 zoom = Vector2(4, 4)
+limit_bottom = 80
 position_smoothing_enabled = true
 
 [node name="Platform" parent="." instance=ExtResource("3_shm5x")]
@@ -648,3 +654,25 @@ libraries = {
 "": SubResource("AnimationLibrary_5ap67")
 }
 autoplay = "move"
+
+[node name="Banana" parent="." instance=ExtResource("4_uh73y")]
+position = Vector2(-74, -79)
+
+[node name="Banana2" parent="." instance=ExtResource("4_uh73y")]
+position = Vector2(105, -79)
+
+[node name="Banana3" parent="." instance=ExtResource("4_uh73y")]
+position = Vector2(361, -20)
+
+[node name="Banana4" parent="." instance=ExtResource("4_uh73y")]
+position = Vector2(478, -82)
+
+[node name="Banana5" parent="." instance=ExtResource("4_uh73y")]
+position = Vector2(290, -113)
+
+[node name="Killzone" parent="." instance=ExtResource("5_iqr02")]
+position = Vector2(248, 81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-328, -1)
+shape = SubResource("WorldBoundaryShape2D_5v7ns")
