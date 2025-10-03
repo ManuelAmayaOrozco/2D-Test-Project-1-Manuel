@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://bu7bes48csc7x"]
+[gd_scene load_steps=37 format=3 uid="uid://bu7bes48csc7x"]
 
+[ext_resource type="Script" path="res://scripts/mushroom.gd" id="1_2iqpg"]
 [ext_resource type="Texture2D" uid="uid://bq3f5t16dlkxn" path="res://assets/Enemies/Mushroom/Idle (32x32).png" id="1_t4i2i"]
 [ext_resource type="Texture2D" uid="uid://bxmwg0mvnaou8" path="res://assets/Enemies/Mushroom/Run (32x32).png" id="2_b2ubd"]
 [ext_resource type="PackedScene" uid="uid://b8k3vr0b27drw" path="res://scenes/killzone.tscn" id="3_u3lmt"]
@@ -230,16 +231,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfbde"]
 size = Vector2(20, 16)
 
-[node name="Mushroom" type="Node2D"]
+[node name="Mushroom" type="CharacterBody2D"]
+script = ExtResource("1_2iqpg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4rbr")
 animation = &"running"
-autoplay = "idle"
-frame_progress = 0.666447
+autoplay = "running"
 
 [node name="Killzone" parent="." instance=ExtResource("3_u3lmt")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_sfbde")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-13, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(13, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_sfbde")
