@@ -243,6 +243,7 @@ autoplay = "running"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, 7)
+scale = Vector2(1.1, 1.1)
 shape = SubResource("RectangleShape2D_sfbde")
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
