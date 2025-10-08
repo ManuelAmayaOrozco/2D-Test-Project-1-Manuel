@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://brci122yfy145"]
+[gd_scene load_steps=52 format=3 uid="uid://brci122yfy145"]
 
 [ext_resource type="Texture2D" uid="uid://cx177hlvu5b6c" path="res://assets/Main Characters/Virtual Guy/Idle (32x32).png" id="1_k6lha"]
 [ext_resource type="Script" path="res://scripts/MainGuy.gd" id="1_qskxa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ho6g34dpesrc" path="res://assets/Main Characters/Virtual Guy/Double Jump (32x32).png" id="3_h1kmv"]
 [ext_resource type="Texture2D" uid="uid://2wb4jl0wp86u" path="res://assets/Main Characters/Virtual Guy/Jump (32x32).png" id="3_q0rcj"]
 [ext_resource type="Texture2D" uid="uid://cqy6iwvq88yhh" path="res://assets/Main Characters/Virtual Guy/Run (32x32).png" id="4_pl07q"]
+[ext_resource type="Texture2D" uid="uid://c3g3kebull6e1" path="res://assets/Main Characters/Virtual Guy/Wall Jump (32x32).png" id="7_d0u2q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8435"]
 atlas = ExtResource("2_0taoq")
@@ -155,6 +156,26 @@ region = Rect2(320, 0, 32, 32)
 atlas = ExtResource("4_pl07q")
 region = Rect2(352, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wa0l"]
+atlas = ExtResource("7_d0u2q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_887au"]
+atlas = ExtResource("7_d0u2q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujv1g"]
+atlas = ExtResource("7_d0u2q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4lu6"]
+atlas = ExtResource("7_d0u2q")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l60rv"]
+atlas = ExtResource("7_d0u2q")
+region = Rect2(128, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_0s38g"]
 animations = [{
 "frames": [{
@@ -292,6 +313,26 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wa0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_887au")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujv1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4lu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l60rv")
+}],
+"loop": true,
+"name": &"wall_jump",
+"speed": 20.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ee1p5"]
@@ -304,8 +345,9 @@ script = ExtResource("1_qskxa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_0s38g")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.433492
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)

@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
+const WALL_JUMP_PUSHBACK = 100
+const WALL_SLIDE_GRAVITY = 100
+var is_wall_sliding = false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D
@@ -37,6 +40,26 @@ func _physics_process(delta):
 				velocity.y = JUMP_VELOCITY
 				double_jumping = true
 				double_jumps -= 1
+		
+		if Input.is_action_just_pressed("jump") and is_on_wall and Input.is_action_pressed("move_right"):
+			velocity.y = JUMP_VELOCITY
+			velocity.x = -WALL_JUMP_PUSHBACK
+			
+		if Input.is_action_just_pressed("jump") and is_on_wall and Input.is_action_pressed("move_right"):
+			velocity.y = JUMP_VELOCITY
+			velocity.x = -WALL_JUMP_PUSHBACK
+			
+		if is_on_wall() and !is_on_floor():
+			if Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
+				is_wall_sliding = true
+			else:
+				is_wall_sliding = false
+		else:
+			is_wall_sliding = false
+			
+		if is_wall_sliding:
+			velocity.y += (WALL_SLIDE_GRAVITY * delta)
+			velocity.y = min(velocity.y, WALL_SLIDE_GRAVITY)
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
@@ -44,8 +67,10 @@ func _physics_process(delta):
 		
 		if direction > 0:
 			animated_sprite.flip_h = false
+			collision_shape.position.x = abs(collision_shape.position.x)
 		elif direction < 0:
 			animated_sprite.flip_h = true
+			collision_shape.position.x = abs(collision_shape.position.x)*-1
 		
 		if is_on_floor():
 			if direction == 0:
@@ -57,6 +82,8 @@ func _physics_process(delta):
 				animated_sprite.play("jump")
 			else:
 				animated_sprite.play("double_jump")
+			if is_on_wall():
+				animated_sprite.play("wall_jump")
 
 		
 		if direction:
