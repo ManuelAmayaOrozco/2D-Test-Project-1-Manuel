@@ -10,6 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var ray_cast_right = $RayCastRight
 @onready var front = $Front
 @onready var back = $Back
+@onready var area_shape_2d_hurt = $AreaShape2DHurt
 
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -45,3 +46,10 @@ func _physics_process(delta):
 	position.x += direction * SPEED * delta
 	
 	move_and_slide()
+
+func _on_body_entered(body):
+	die()
+
+func die():
+	animated_sprite.play("idle")
+	queue_free()
