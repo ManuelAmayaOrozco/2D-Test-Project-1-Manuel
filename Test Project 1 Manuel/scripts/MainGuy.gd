@@ -45,7 +45,7 @@ func _physics_process(delta):
 			velocity.y = JUMP_VELOCITY
 			velocity.x = -WALL_JUMP_PUSHBACK
 			
-		if Input.is_action_just_pressed("jump") and is_on_wall(d) and Input.is_action_pressed("move_left"):
+		if Input.is_action_just_pressed("jump") and is_on_wall() and Input.is_action_pressed("move_left"):
 			velocity.y = JUMP_VELOCITY
 			velocity.x = -WALL_JUMP_PUSHBACK
 			
